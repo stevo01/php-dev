@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+
+  php8:
+    build: ./docker
+    image: php8
+    # image: php:8.0.30-apache
+    restart: always
+    ports:
+      - 8181:80
+    volumes:
+      - "./volumes/app/:/var/www/html"
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: sampledb
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - "./volumes/db/:/var/lib/mysql"
