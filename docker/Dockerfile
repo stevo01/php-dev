@@ -14,10 +14,12 @@ RUN apt-get update && \
     git \
     unzip \
     mc \
+    libpng-dev \
     -y --no-install-recommends
 
 # Install PHP Extensions
 RUN docker-php-ext-install zip pdo_mysql
+RUN docker-php-ext-install gd
 
 RUN pecl install -o -f xdebug-3.1.5 \
     && docker-php-ext-enable xdebug
